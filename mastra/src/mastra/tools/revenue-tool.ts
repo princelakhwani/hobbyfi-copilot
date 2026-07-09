@@ -1,12 +1,11 @@
 import { createTool } from "@mastra/core/tools";
 import { z } from "zod";
-
 import backend from "../services/backend-client";
 
 export const revenueTool = createTool({
-  id: "get-revenue",
+  id: "revenue-tool",
 
-  description: "Returns today's revenue for the vendor.",
+  description: "Get today's revenue from HobbyFi backend.",
 
   inputSchema: z.object({}),
 
@@ -15,10 +14,10 @@ export const revenueTool = createTool({
   }),
 
   execute: async () => {
-    const response = await backend.get("/analytics/revenue");
+    const { data } = await backend.get("/analytics/revenue");
 
     return {
-      revenue: response.data.revenue,
+      revenue: data.revenue,
     };
   },
 });
