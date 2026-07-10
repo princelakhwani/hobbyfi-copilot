@@ -5,7 +5,8 @@ import backend from "../services/backend-client";
 export const trialUsersTool = createTool({
   id: "trial-users-tool",
 
-  description: "Returns all trial users of a sport.",
+  description:
+    "Retrieve all users currently on trial for a given sport.",
 
   inputSchema: z.object({
     sport: z.string(),
@@ -24,7 +25,9 @@ export const trialUsersTool = createTool({
 
   execute: async ({ sport }) => {
     const { data } = await backend.get("/users/trial", {
-      params: { sport },
+      params: {
+        sport,
+      },
     });
 
     return data;

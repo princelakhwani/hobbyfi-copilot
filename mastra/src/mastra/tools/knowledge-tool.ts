@@ -5,7 +5,8 @@ import { createTool } from "@mastra/core/tools";
 export const knowledgeTool = createTool({
   id: "knowledge-tool",
 
-  description: "Answer questions using the HobbyFi knowledge base.",
+  description:
+    "Answer questions about HobbyFi policies, cancellations, refunds, bookings, FAQs, and company information using the knowledge base.",
 
   inputSchema: z.object({
     question: z.string(),

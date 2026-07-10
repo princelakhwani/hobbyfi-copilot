@@ -6,7 +6,7 @@ export const membershipTool = createTool({
   id: "membership-tool",
 
   description:
-    "Extend a user's membership. Requires vendor approval before execution.",
+    "Extend or renew a user's membership. This modifies the database and should only be executed after explicit user approval.",
 
   inputSchema: z.object({
     email: z.string().email(),
@@ -25,7 +25,7 @@ export const membershipTool = createTool({
       return {
         success: false,
         message:
-          "Approval required before membership update can be executed.",
+          "Approval required. Ask the user to confirm before executing this membership update.",
       };
     }
 
@@ -34,6 +34,10 @@ export const membershipTool = createTool({
       days,
     });
 
-    return data;
+    return {
+      success: true,
+      message: data.message,
+      expiry_date: data.expiry_date,
+    };
   },
 });

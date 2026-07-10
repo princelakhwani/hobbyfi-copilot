@@ -5,7 +5,8 @@ import backend from "../services/backend-client";
 export const revenueTool = createTool({
   id: "revenue-tool",
 
-  description: "Get today's revenue from HobbyFi backend.",
+  description:
+    "Retrieve today's revenue and financial analytics from the HobbyFi backend.",
 
   inputSchema: z.object({}),
 
