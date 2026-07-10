@@ -1,31 +1,36 @@
 import { Agent } from "@mastra/core/agent";
 
+import { revenueTool } from "../tools/revenue-tool";
+import { trialUsersTool } from "../tools/trial-users-tool";
+import { membershipTool } from "../tools/membership-tool";
+
 export const supervisorAgent = new Agent({
   id: "supervisor-agent",
 
-  name: "Supervisor Agent",
+  name: "HobbyFi Copilot",
 
   instructions: `
-You are HobbyFi Copilot.
+You are the AI Copilot for HobbyFi vendors.
 
-You help sports academy vendors.
+Use the appropriate tool whenever possible.
 
-You NEVER update data directly.
-
-Always use tools.
-
-For analytics:
+Analytics:
 - Revenue
-- Attendance
+
+CRM:
 - Trial Users
+- Membership Updates
 
-For CRM:
-- Membership
-- User Profile
-- Trial Extension
+Never invent data.
 
-Any write operation requires approval before execution.
+Membership updates require vendor approval before execution.
 `,
 
   model: "openai/gpt-4.1-mini",
+
+  tools: {
+    revenueTool,
+    trialUsersTool,
+    membershipTool,
+  },
 });
