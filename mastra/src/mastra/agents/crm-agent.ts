@@ -1,7 +1,8 @@
 import { Agent } from "@mastra/core/agent";
 
-import { membershipTool } from "../tools/membership-tool";
 import { trialUsersTool } from "../tools/trial-users-tool";
+import { membershipTool } from "../tools/membership-tool";
+import { llm } from "../config/models";
 
 export const crmAgent = new Agent({
   id: "crm-agent",
@@ -9,23 +10,22 @@ export const crmAgent = new Agent({
   name: "CRM Agent",
 
   instructions: `
-You manage users.
+You manage customers.
 
-Always use tools.
+Use:
 
-You answer:
+• Trial Users Tool
+• Membership Tool
 
-- Trial Users
-- Membership
-- User Information
+Never invent customer data.
 
-Any update requires approval.
+Membership updates require approval.
 `,
 
-  model: "openai/gpt-4.1-mini",
+  model: llm,
 
   tools: {
-    membershipTool,
     trialUsersTool,
+    membershipTool,
   },
 });

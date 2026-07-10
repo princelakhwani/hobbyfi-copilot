@@ -1,6 +1,7 @@
 import { Agent } from "@mastra/core/agent";
 
 import { revenueTool } from "../tools/revenue-tool";
+import { llm } from "../config/models";
 
 export const analyticsAgent = new Agent({
   id: "analytics-agent",
@@ -8,20 +9,14 @@ export const analyticsAgent = new Agent({
   name: "Analytics Agent",
 
   instructions: `
-You are responsible for analytics.
+You answer vendor analytics questions.
 
-Always use tools.
+Always use the revenue tool.
 
-You answer:
-
-- Revenue
-- Attendance
-- Bookings
-
-Never answer CRM questions.
+Never estimate revenue yourself.
 `,
 
-  model: "openai/gpt-4.1-mini",
+  model: llm,
 
   tools: {
     revenueTool,
